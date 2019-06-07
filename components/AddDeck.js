@@ -61,9 +61,7 @@ const styles = {
 function mapDispatchToProps(dispatch) {
   return {
     addDeck: (name) => {
-      dispatch(handleAddDeck({
-        name,
-      }))
+      dispatch(handleAddDeck(name))
     }
   }
 }

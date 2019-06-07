@@ -1,22 +1,32 @@
 import React, { Component } from 'react'
-import { Button, StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { connect } from 'react-redux'
+import { withNavigation } from 'react-navigation'
 
 class DeckListItem extends Component {
+
+  navigate = () => {
+    console.log('here we go')
+    this.props.navigation.navigate('Deck', {
+      id: this.props.id,
+    })
+  }
+
   render() {
     return (
-      <View>
-        <Text>{this.props.name}</Text>
-      </View>
+      <TouchableOpacity onPress={this.navigate}>
+        <Text style={{fontSize: 24}}>{this.props.name}</Text>
+      </TouchableOpacity>
     )
   }
 }
 
 function mapStateToProps({ decks }, { id }) {
+  console.log('Processing item: ', id)
   return {
     id,
     name: decks[id].name,
   }
 }
 
-export default connect(mapStateToProps)(DeckListItem)
+export default withNavigation(connect(mapStateToProps)(DeckListItem))
