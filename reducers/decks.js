@@ -1,4 +1,4 @@
-import { ADD_DECK, DELETE_DECK, LOAD_DECKS } from '../actions/decks'
+import { ADD_DECK, DELETE_DECK, DELETE_DECKS, LOAD_DECKS } from '../actions/decks'
 
 export default function decks(state = {}, action) {
   switch (action.type) {
@@ -14,6 +14,8 @@ export default function decks(state = {}, action) {
       return {
         ...rest,
       }
+    case DELETE_DECKS:
+      return {}
     case LOAD_DECKS:
       return {
         ...state,

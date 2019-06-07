@@ -1,19 +1,52 @@
-import { saveNewDeck } from '../utils/api'
+import { saveNewQuestion, fetchQuestions } from '../utils/api'
 
 export const ADD_QUESTION = 'ADD_QUESTION'
+export const DELETE_QUESTIONS = 'DELETE_QUESTIONS'
+export const LOAD_QUESTIONS = 'LOAD_QUESTIONS'
 
-function addDeck(deck) {
+function addQuestion(question) {
   return {
     type: ADD_QUESTION,
-    deck,
+    question,
   }
 }
 
-export function handleAddDeck({ name }) {
+export function handleAddQuestion(question) {
     return (dispatch, getState) => {
-      saveNewDeck(name)
+      saveNewQuestion(question)
         .then((deck) => {
-          dispatch(addDeck(deck))
+          dispatch(addQuestion(question))
         })
     }
+}
+
+function loadQuestions(questions) {
+  return {
+    type: LOAD_QUESTIONS,
+    questions,
+  }
+}
+
+export function handleLoadQuestions() {
+    return (dispatch, getState) => {
+      fetchQuestions()
+        .then((questions) => {
+          dispatch(loadQuestions(questions))
+        })
+    }
+}
+
+function deleteQuestions() {
+  return {
+    type: DELETE_QUESTIONS,
+  }
+}
+
+export function handleDeleteQuestions() {
+  return (dispatch, getState) => {
+    removeQuestions()
+      .then(() => {
+        dispatch(deleteQuestions())
+      })
+  }
 }

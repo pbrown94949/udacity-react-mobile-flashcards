@@ -5,11 +5,13 @@ import { Provider, connect } from 'react-redux'
 import DeckListItem from './DeckListItem'
 import { clearAll, fetchDecks } from '../utils/api'
 import { handleLoadDecks } from '../actions/decks'
+import { handleLoadQuestions } from '../actions/questions'
 
 class DeckList extends Component {
 
   componentDidMount()  {
     this.props.dispatch(handleLoadDecks())
+    this.props.dispatch(handleLoadQuestions())
   }
 
   render() {
@@ -24,10 +26,8 @@ class DeckList extends Component {
 }
 
 function mapStateToProps({ decks }) {
-  const ids = Object.keys(decks)
-  console.log('here are the ids: ', ids)
   return {
-    decks: ids,
+    decks: Object.keys(decks),
   }
 }
 

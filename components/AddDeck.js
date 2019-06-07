@@ -2,26 +2,29 @@ import React, { Component } from 'react'
 import { Button, Text, TextInput, View } from 'react-native'
 import { connect } from 'react-redux'
 import { handleAddDeck } from '../actions/decks'
-import { addDeck2, getAllDecks } from '../utils/api.js'
+import { generateUID } from '../utils/api.js'
 
 class AddDeck extends Component {
 
   state = {
-    deckName: '',
+    name: '',
   }
 
-  onChangeText = (deckName) => {
+  onChangeText = (name) => {
     this.setState({
-      deckName
+      name
     })
   }
 
   onPress = () => {
-    this.props.addDeck(this.state.deckName)
+    const id = generateUID()
+    this.props.addDeck(id, this.state.name)
     this.setState({
-      deckName: '',
+      name: '',
     })
-    this.props.navigation.navigate('Home')
+    this.props.navigation.navigate('AddQuestion', {
+      deckId: id,
+    })
   }
 
   render() {
@@ -35,16 +38,13 @@ class AddDeck extends Component {
         <TextInput
           style={styles.textInput}
           onChangeText={this.onChangeText}
-          value={this.state.deckName}
+          value={this.state.name}
           placeholder='Enter the deck name'
         />
-        <Text>
-          {this.state.deckName}
-        </Text>
         <Button
           title='Submit'
           onPress={this.onPress}
-          disabled={this.state.deckName === ''}
+          disabled={this.state.name === ''}
         />
       </View>
     )
@@ -60,8 +60,8 @@ const styles = {
 
 function mapDispatchToProps(dispatch) {
   return {
-    addDeck: (name) => {
-      dispatch(handleAddDeck(name))
+    addDeck: (id, name) => {
+      dispatch(handleAddDeck(id, name))
     }
   }
 }

@@ -8,8 +8,7 @@ export function fetchDecks() {
     .then((item) => JSON.parse(item))
 }
 
-export function saveNewDeck(name) {
-  const id = generateUID()
+export function saveNewDeck(id, name) {
   return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({
     [id]: {id, name},
   })).then(() => {
@@ -18,25 +17,6 @@ export function saveNewDeck(name) {
       name,
     }
   })
-}
-
-export function saveNewQuestion(question, answer, deckId) {
-  const id = generateUID()
-  return AsyncStorage.mergeItem(QUESTION_STORAGE_KEY, JSON.stringify({
-    [id]: name,
-  })).then(() => {
-    return {
-      id,
-      question,
-      answer,
-      deckId,
-    }
-  })
-}
-
-export function clearAll() {
-  AsyncStorage.removeItem(DECK_STORAGE_KEY)
-  AsyncStorage.removeItem(QUESTION_STORAGE_KEY)
 }
 
 export function removeDeck(key) {
@@ -49,7 +29,30 @@ export function removeDeck(key) {
     })
 }
 
+export function removeDecks() {
+  AsyncStorage.removeItem(DECK_STORAGE_KEY)
+}
 
-function generateUID () {
+export function fetchQuestions() {
+  return AsyncStorage.getItem(QUESTION_STORAGE_KEY)
+    .then((item) => JSON.parse(item))
+}
+
+export function saveNewQuestion({ id, question, answer, deckId }) {
+  return AsyncStorage.mergeItem(QUESTION_STORAGE_KEY, JSON.stringify({
+    [id]: {
+      id,
+      question,
+      answer,
+      deckId,
+    },
+  }))
+}
+
+export function removeQuestions() {
+  AsyncStorage.removeItem(QUESTION_STORAGE_KEY)
+}
+
+export function generateUID () {
   return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 }

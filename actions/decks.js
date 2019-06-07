@@ -2,6 +2,7 @@ import { fetchDecks, removeDeck, saveNewDeck } from '../utils/api'
 
 export const ADD_DECK = 'ADD_DECK'
 export const DELETE_DECK = 'DELETE_DECK'
+export const DELETE_DECKS = 'DELETE_DECKS'
 export const LOAD_DECKS = 'LOAD_DECKS'
 
 function addDeck(deck) {
@@ -11,9 +12,9 @@ function addDeck(deck) {
   }
 }
 
-export function handleAddDeck(name) {
+export function handleAddDeck(id, name) {
     return (dispatch, getState) => {
-      saveNewDeck(name)
+      saveNewDeck(id, name)
         .then((deck) => {
           dispatch(addDeck(deck))
         })
@@ -48,6 +49,21 @@ export function handleDeleteDeck(id) {
     removeDeck(id)
       .then(() => {
         dispatch(deleteDeck(id))
+      })
+  }
+}
+
+function deleteDecks() {
+  return {
+    type: DELETE_DECKS,
+  }
+}
+
+export function handleDeleteDecks() {
+  return (dispatch, getState) => {
+    removeDecks()
+      .then(() => {
+        dispatch(deleteDecks())
       })
   }
 }

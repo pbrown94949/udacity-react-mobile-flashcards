@@ -8,37 +8,15 @@ import DeckList from './components/DeckList'
 import Deck from './components/Deck'
 import AddQuestion from './components/AddQuestion'
 import DeckListItem from './components/DeckListItem'
+import Home from './components/Home'
 import reducer from './reducers'
 import middleware from './middleware'
 import { clearAll, fetchDecks } from './utils/api'
 
-class App extends Component {
-
-  deleteEverything = () => {
-    clearAll()
-  }
-
-  render() {
-    return (
-      <View>
-        <DeckList />
-        <Button
-          title='Add Deck'
-          onPress={() => this.props.navigation.navigate('AddDeck')}
-        />
-        <Button
-          title='Delete Everything'
-          onPress={this.deleteEverything}
-        />
-      </View>
-    )
-  }
-}
-
 const AppNavigator = createStackNavigator(
   {
     Home: {
-      screen: App
+      screen: Home
     },
     AddDeck: {
       screen: AddDeck
@@ -57,6 +35,17 @@ const AppNavigator = createStackNavigator(
 
 const AppContainer = createAppContainer(AppNavigator)
 
+class App extends Component {
+
+  render() {
+    return (
+      <Provider store={createStore(reducer, middleware)}>
+        <AppContainer />
+      </Provider>
+    )
+  }
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -66,10 +55,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default function() {
-  return (
-    <Provider store={createStore(reducer, middleware)}>
-      <AppContainer />
-    </Provider>
-  )
-}
+export default App

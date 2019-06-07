@@ -5,34 +5,54 @@ import { handleDeleteDeck } from '../actions/decks'
 
 class Deck extends Component {
 
+  state = {
+    deleted: false,
+  }
+
+  addQuestion = () => {
+    this.props.navigation.navigate('AddQuestion', {
+      deckId: this.props.id,
+    })
+  }
+
   deleteDeck = () => {
+    this.setState({
+      deleted: true,
+    })
     this.props.doDelete(this.props.id)
     this.props.navigation.navigate('Home')
   }
 
   render() {
-    const { id, name } = this.props
+    const { id, name, questionCount } = this.props
     return (
       <View>
         <Text>Details</Text>
         <Text>{id}</Text>
         <Text>{name}</Text>
+        <Text>{questionCount}</Text>
+        <Button
+          title='Add Question'
+          onPress={this.addQuestion}
+        />
         <Button
           title='Delete Deck'
           onPress={this.deleteDeck}
         />
-
       </View>
     )
   }
 }
 
-function mapStateToProps({ decks }, { navigation }) {
+function mapStateToProps({ decks, questions }, { navigation }) {
   const id = navigation.getParam('id', '')
-  const name = decks[id] ? decks[id].name : ''
+  const questionCount = Object.values(questions)
+    .filter((question) => question.deckId === id)
+    .length
   return {
       id,
-      name,
+      name: decks[id] ? decks[id].name : '',
+      questionCount,
   }
 }
 

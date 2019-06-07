@@ -1,16 +1,34 @@
 import React, { Component } from 'react'
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
 import { connect } from 'react-redux'
+import { handleAddQuestion } from '../actions/questions'
+import { generateUID } from '../utils/api.js'
 
 class AddQuestion extends Component {
+
   state = {
     question: '',
     answer: '',
   }
 
+  onPress = () => {
+    const { answer, question } = this.state
+    const { addQuestion, deckId, navigation } = this.props
+    addQuestion({
+      id: generateUID(),
+      question,
+      answer,
+      deckId,
+    })
+    navigation.navigate('Deck', {
+      id: deckId,
+    })
+  }
+
   render() {
     return (
       <View>
+        <Text>Add Question for Deck {this.props.deckName}</Text>
         <TextInput
           style={styles.textInput}
           onChangeText={(question) => this.setState({ question })}
@@ -40,11 +58,21 @@ const styles = {
   }
 }
 
-function mapStateToProps({ decks }, { deckId }) {
+function mapStateToProps({ decks }, { navigation }) {
+  const deckId = navigation.getParam('deckId', '')
+  const deckName = decks[deckId] ? decks[deckId].name : ''
   return {
     deckId,
-    deckName: decks[deckId].name,
+    deckName,
   }
 }
 
-export default connect(mapStateToProps)(AddQuestion)
+function mapDispatchToProps(dispatch) {
+  return {
+    addQuestion: (question) => {
+      dispatch(handleAddQuestion(question))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddQuestion)
