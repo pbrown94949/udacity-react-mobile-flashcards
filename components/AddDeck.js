@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { Button, Text, TextInput, View } from 'react-native'
+import { connect } from 'react-redux'
+import { handleAddDeck } from '../actions/decks'
+import { addDeck2, getAllDecks } from '../utils/api.js'
 
 class AddDeck extends Component {
 
@@ -11,6 +14,14 @@ class AddDeck extends Component {
     this.setState({
       deckName
     })
+  }
+
+  onPress = () => {
+    this.props.addDeck(this.state.deckName)
+    this.setState({
+      deckName: '',
+    })
+    this.props.navigation.navigate('Home')
   }
 
   render() {
@@ -32,6 +43,7 @@ class AddDeck extends Component {
         </Text>
         <Button
           title='Submit'
+          onPress={this.onPress}
           disabled={this.state.deckName === ''}
         />
       </View>
@@ -46,4 +58,14 @@ const styles = {
   }
 }
 
-export default AddDeck
+function mapDispatchToProps(dispatch) {
+  return {
+    addDeck: (name) => {
+      dispatch(handleAddDeck({
+        name,
+      }))
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(AddDeck)
