@@ -7,30 +7,31 @@ import { countQuestionsInDeck } from '../utils/misc.js'
 class Deck extends Component {
 
   addQuestion = () => {
-    this.props.navigation.navigate('AddQuestion', {
-      deckId: this.props.id,
+    const { id, navigation } = this.props
+    navigation.navigate('AddQuestion', {
+      deckId: id,
     })
   }
 
   startQuiz = () => {
-    this.props.navigation.navigate('Quiz', {
-      deckId: this.props.id,
+    const { id, navigation } = this.props
+    navigation.navigate('Quiz', {
+      deckId: id,
     })
   }
 
   deleteDeck = () => {
-    this.props.doDelete(this.props.id)
-    this.props.navigation.navigate('Home')
+    const { doDelete, id, navigation } = this.props
+    doDelete(id)
+    navigation.navigate('Home')
   }
 
   render() {
-    const { id, name, questionCount } = this.props
+    const { deckSize, id, name } = this.props
     return (
       <View>
-        <Text>Details</Text>
-        <Text>{id}</Text>
         <Text>{name}</Text>
-        <Text>{questionCount}</Text>
+        <Text>Questions: {deckSize}</Text>
         <Button
           title='Add Question'
           onPress={this.addQuestion}
@@ -53,7 +54,7 @@ function mapStateToProps({ decks, questions }, { navigation }) {
   return {
       id,
       name: decks[id] ? decks[id].name : '',
-      questionCount: countQuestionsInDeck(id, questions)
+      deckSize: countQuestionsInDeck(id, questions)
   }
 }
 

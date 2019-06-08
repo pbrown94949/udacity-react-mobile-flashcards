@@ -12,10 +12,10 @@ function addDeck(deck) {
   }
 }
 
-export function handleAddDeck(id, name) {
+export function handleAddDeck(deck) {
     return (dispatch, getState) => {
-      saveNewDeck(id, name)
-        .then((deck) => {
+      saveNewDeck(deck)
+        .then(() => {
           dispatch(addDeck(deck))
         })
     }

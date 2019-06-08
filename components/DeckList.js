@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { Button, StyleSheet, Text, View } from 'react-native'
-import { createStore } from 'redux'
-import { Provider, connect } from 'react-redux'
+import { connect } from 'react-redux'
 import DeckListItem from './DeckListItem'
-import { clearAll, fetchDecks } from '../utils/api'
 
 class DeckList extends Component {
 

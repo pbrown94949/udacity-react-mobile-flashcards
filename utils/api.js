@@ -8,15 +8,10 @@ export function fetchDecks() {
     .then((item) => JSON.parse(item))
 }
 
-export function saveNewDeck(id, name) {
+export function saveNewDeck({id, name}) {
   return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({
     [id]: {id, name},
-  })).then(() => {
-    return {
-      id,
-      name,
-    }
-  })
+  }))
 }
 
 export function removeDeck(key) {

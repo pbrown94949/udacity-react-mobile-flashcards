@@ -14,7 +14,7 @@ function addQuestion(question) {
 export function handleAddQuestion(question) {
     return (dispatch, getState) => {
       saveNewQuestion(question)
-        .then((deck) => {
+        .then(() => {
           dispatch(addQuestion(question))
         })
     }

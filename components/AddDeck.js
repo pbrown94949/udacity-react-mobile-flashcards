@@ -10,16 +10,14 @@ class AddDeck extends Component {
     name: '',
   }
 
-  onChangeText = (name) => {
-    this.setState({
-      name
-    })
-  }
-
   onPress = () => {
-    const id = generateUID()
-    this.props.addDeck(id, this.state.name)
-    this.props.navigation.replace('Deck', {
+    const { name } = this.state
+    const { addDeck, navigation } = this.props
+    addDeck({
+      id: generateUID(),
+      name,
+    })
+    navigation.replace('Deck', {
       id,
     })
   }
@@ -34,7 +32,9 @@ class AddDeck extends Component {
         </Text>
         <TextInput
           style={styles.textInput}
-          onChangeText={this.onChangeText}
+          onChangeText={(name) => this.setState({
+            name
+          })}
           value={this.state.name}
           placeholder='Enter the deck name'
         />

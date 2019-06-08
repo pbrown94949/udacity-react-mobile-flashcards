@@ -26,25 +26,30 @@ class AddQuestion extends Component {
   }
 
   render() {
+    const { answer, question } = this.state
     return (
       <View>
         <Text>Add Question for Deck {this.props.deckName}</Text>
         <TextInput
           style={styles.textInput}
-          onChangeText={(question) => this.setState({ question })}
-          value={this.state.question}
+          onChangeText={(question) => this.setState({
+            question
+          })}
+          value={question}
           placeholder='Enter a question'
         />
         <TextInput
           style={styles.textInput}
-          onChangeText={(answer) => this.setState({ answer })}
-          value={this.state.answer}
+          onChangeText={(answer) => this.setState({
+            answer
+          })}
+          value={answer}
           placeholder='Enter the answer'
         />
         <Button
           title='Submit'
           onPress={this.onPress}
-          disabled={this.state.question === '' || this.state.answer === ''}
+          disabled={question === '' || answer === ''}
         />
       </View>
     )
@@ -60,10 +65,9 @@ const styles = {
 
 function mapStateToProps({ decks }, { navigation }) {
   const deckId = navigation.getParam('deckId', '')
-  const deckName = decks[deckId] ? decks[deckId].name : ''
   return {
     deckId,
-    deckName,
+    deckName: decks[deckId].name
   }
 }
 

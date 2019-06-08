@@ -4,9 +4,9 @@ import { handleAddQuestion } from './questions.js'
 
 export function handleLoadDummyData() {
   return (dispatch, getState) => {
-    dispatch(handleAddDeck(generateUID(), 'Latin'))
-    dispatch(handleAddDeck(generateUID(), 'French'))
-    dispatch(handleAddDeck(generateUID(), 'History'))
+    addDeck(dispatch, 'Latin')
+    addDeck(dispatch, 'French')
+    addDeck(dispatch, 'History')
     fetchDecks()
       .then((decks) => {
         Object.keys(decks).map((deckId) => {
@@ -14,6 +14,13 @@ export function handleLoadDummyData() {
         })
       })
   }
+}
+
+function addDeck(dispatch, name) {
+  dispatch(handleAddDeck({
+    id: generateUID(),
+    name,
+  }))
 }
 
 function addQuestionsToDeck(dispatch, deckId) {

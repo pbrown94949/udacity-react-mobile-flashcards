@@ -13,20 +13,21 @@ class Home extends Component {
   }
 
   render() {
+    const { deleteEverything, loadTestData, navigation } = this.props
     return (
       <View style={styles.container}>
         <DeckList />
         <Button
           title='Add Deck'
-          onPress={() => this.props.navigation.navigate('AddDeck')}
+          onPress={() => navigation.navigate('AddDeck')}
         />
         <Button
           title='Delete Everything'
-          onPress={this.props.deleteEverything}
+          onPress={deleteEverything}
         />
         <Button
           title='Load Test Data'
-          onPress={this.props.loadTestData}
+          onPress={loadTestData}
         />
       </View>
     )
