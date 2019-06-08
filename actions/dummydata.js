@@ -3,7 +3,7 @@ import { handleAddDeck } from './decks.js'
 import { handleAddQuestion } from './questions.js'
 
 export function handleLoadDummyData() {
-  return (dispatch, getState) => {
+  return async (dispatch, getState) => {
     addDeck(dispatch, 'Latin')
     addDeck(dispatch, 'French')
     addDeck(dispatch, 'History')
@@ -13,6 +13,7 @@ export function handleLoadDummyData() {
           addQuestionsToDeck(dispatch, deckId)
         })
       })
+    addDeck(dispatch, 'Chemistry')
   }
 }
 
@@ -27,12 +28,12 @@ function addQuestionsToDeck(dispatch, deckId) {
   addQuestionToDeck(dispatch, deckId, 'Who?', 'You')
   addQuestionToDeck(dispatch, deckId, 'What?', 'This')
   addQuestionToDeck(dispatch, deckId, 'When?', 'Now')
-  //bleep(dispatch, id, 'Where?', 'There')
-  //bleep(dispatch, id, 'Why?', 'Because')
-  //bleep(dispatch, id, 'How?', 'Quickly')
+  addQuestionToDeck(dispatch, deckId, 'Where?', 'There')
+  addQuestionToDeck(dispatch, deckId, 'Why?', 'Because')
+  addQuestionToDeck(dispatch, deckId, 'How?', 'Quickly')
 }
 
-function addQuestionToDeck(dispatch, deckId, question, answer) {
+async function addQuestionToDeck(dispatch, deckId, question, answer) {
   dispatch(handleAddQuestion({
     id: generateUID(),
     question,

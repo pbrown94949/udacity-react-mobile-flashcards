@@ -8,19 +8,19 @@ export function fetchDecks() {
     .then((item) => JSON.parse(item))
 }
 
-export function saveNewDeck({id, name}) {
+export function saveNewDeck(deck) {
   return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({
-    [id]: {id, name},
+    [deck.id]: deck,
   }))
 }
 
 export function removeDeck(key) {
   return AsyncStorage.getItem(DECK_STORAGE_KEY)
-    .then((results) => {
-      const data = JSON.parse(results)
-      data[key] = undefined
-      delete data[key]
-      AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(data))
+    .then((json) => {
+      const decks = JSON.parse(json)
+      decks[key] = undefined
+      delete decks[key]
+      AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks))
     })
 }
 
@@ -28,24 +28,29 @@ export function removeDecks() {
   return AsyncStorage.removeItem(DECK_STORAGE_KEY)
 }
 
+export function logDecks() {
+  return AsyncStorage.getItem(DECK_STORAGE_KEY)
+    .then((item) => console.log(JSON.parse(item)))
+}
+
 export function fetchQuestions() {
   return AsyncStorage.getItem(QUESTION_STORAGE_KEY)
     .then((item) => JSON.parse(item))
 }
 
-export function saveNewQuestion({ id, question, answer, deckId }) {
+export function saveNewQuestion(question) {
   return AsyncStorage.mergeItem(QUESTION_STORAGE_KEY, JSON.stringify({
-    [id]: {
-      id,
-      question,
-      answer,
-      deckId,
-    },
+    [question.id]: question,
   }))
 }
 
 export function removeQuestions() {
   return AsyncStorage.removeItem(QUESTION_STORAGE_KEY)
+}
+
+export function logQuestions() {
+  return AsyncStorage.getItem(QUESTION_STORAGE_KEY)
+    .then((item) => console.log(JSON.parse(item)))
 }
 
 export function generateUID () {

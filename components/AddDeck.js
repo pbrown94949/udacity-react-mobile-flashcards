@@ -13,8 +13,9 @@ class AddDeck extends Component {
   onPress = () => {
     const { name } = this.state
     const { addDeck, navigation } = this.props
+    const id = generateUID()
     addDeck({
-      id: generateUID(),
+      id,
       name,
     })
     navigation.replace('Deck', {

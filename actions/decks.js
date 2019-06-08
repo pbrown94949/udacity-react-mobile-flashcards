@@ -13,12 +13,12 @@ function addDeck(deck) {
 }
 
 export function handleAddDeck(deck) {
-    return (dispatch, getState) => {
-      saveNewDeck(deck)
-        .then(() => {
-          dispatch(addDeck(deck))
-        })
-    }
+  return (dispatch, getState) => {
+    saveNewDeck(deck)
+      .then(() => {
+        dispatch(addDeck(deck))
+      })
+  }
 }
 
 function loadDecks(decks) {

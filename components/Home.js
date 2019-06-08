@@ -5,6 +5,7 @@ import DeckList from './DeckList'
 import { handleDeleteDecks, handleLoadDecks } from '../actions/decks'
 import { handleDeleteQuestions, handleLoadQuestions } from '../actions/questions'
 import { handleLoadDummyData } from '../actions/dummydata'
+import { logDecks, logQuestions } from '../utils/api'
 
 class Home extends Component {
 
@@ -28,6 +29,14 @@ class Home extends Component {
         <Button
           title='Load Test Data'
           onPress={loadTestData}
+        />
+        <Button
+          title='Log Decks'
+          onPress={logDecks}
+        />
+        <Button
+          title='Log Questions'
+          onPress={logQuestions}
         />
       </View>
     )

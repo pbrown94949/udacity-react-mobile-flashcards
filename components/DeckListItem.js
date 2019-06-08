@@ -25,10 +25,13 @@ class DeckListItem extends Component {
 }
 
 function mapStateToProps({ decks, questions }, { id }) {
+  const deckSize = Object.values(questions)
+    .filter((question) => question.deckId === id)
+    .length
   return {
     id,
     name: decks[id].name,
-    deckSize: countQuestionsInDeck(id, questions)
+    deckSize,
   }
 }
 

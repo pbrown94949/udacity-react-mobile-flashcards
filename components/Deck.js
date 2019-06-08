@@ -51,10 +51,13 @@ class Deck extends Component {
 
 function mapStateToProps({ decks, questions }, { navigation }) {
   const id = navigation.getParam('id', '')
+  const deckSize = Object.values(questions)
+    .filter((question) => question.deckId === id)
+    .length
   return {
       id,
       name: decks[id] ? decks[id].name : '',
-      deckSize: countQuestionsInDeck(id, questions)
+      deckSize
   }
 }
 

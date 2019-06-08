@@ -1,16 +1,12 @@
-export function countQuestionsInDeck(deckId, questions) {
-  return Object.values(questions)
-    .filter((question) => question.deckId === deckId)
-    .length
-}
-
-export function getQuestionIdsInDeck(deckId, questions) {
-  return Object.values(questions)
-    .filter((question) => question.deckId === deckId)
-    .map((question) => question.id)
-}
-
-export function getQuestionsInDeck(deckId, questions) {
-  return Object.values(questions)
-    .filter((question) => question.deckId === deckId)
+// Taken from: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+export function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+  while (0 !== currentIndex) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+  return array;
 }
