@@ -1,4 +1,4 @@
-import { saveNewQuestion, fetchQuestions } from '../utils/api'
+import { fetchQuestions, removeQuestions, saveNewQuestion } from '../utils/api'
 
 export const ADD_QUESTION = 'ADD_QUESTION'
 export const DELETE_QUESTIONS = 'DELETE_QUESTIONS'

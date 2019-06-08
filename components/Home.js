@@ -4,8 +4,14 @@ import { connect } from 'react-redux'
 import DeckList from './DeckList'
 import { handleDeleteDecks } from '../actions/decks'
 import { handleDeleteQuestions } from '../actions/questions'
+import { handleLoadDecks } from '../actions/decks'
+import { handleLoadQuestions } from '../actions/questions'
 
 class Home extends Component {
+
+  componentDidMount()  {
+    this.props.loadEverything()
+  }
 
   render() {
     return (
@@ -29,6 +35,10 @@ function mapDispatchToProps(dispatch) {
     deleteEverything: () => {
       dispatch(handleDeleteDecks())
       dispatch(handleDeleteQuestions())
+    },
+    loadEverything: () => {
+      dispatch(handleLoadDecks())
+      dispatch(handleLoadQuestions())
     }
   }
 }

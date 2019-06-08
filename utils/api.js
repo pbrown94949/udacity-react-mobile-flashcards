@@ -30,7 +30,7 @@ export function removeDeck(key) {
 }
 
 export function removeDecks() {
-  AsyncStorage.removeItem(DECK_STORAGE_KEY)
+  return AsyncStorage.removeItem(DECK_STORAGE_KEY)
 }
 
 export function fetchQuestions() {
@@ -50,7 +50,7 @@ export function saveNewQuestion({ id, question, answer, deckId }) {
 }
 
 export function removeQuestions() {
-  AsyncStorage.removeItem(QUESTION_STORAGE_KEY)
+  return AsyncStorage.removeItem(QUESTION_STORAGE_KEY)
 }
 
 export function generateUID () {

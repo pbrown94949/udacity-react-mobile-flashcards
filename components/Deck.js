@@ -5,20 +5,17 @@ import { handleDeleteDeck } from '../actions/decks'
 
 class Deck extends Component {
 
-  state = {
-    deleted: false,
-  }
-
   addQuestion = () => {
     this.props.navigation.navigate('AddQuestion', {
       deckId: this.props.id,
     })
   }
 
+  startQuiz = () => {
+    console.log('Start quiz')
+  }
+
   deleteDeck = () => {
-    this.setState({
-      deleted: true,
-    })
     this.props.doDelete(this.props.id)
     this.props.navigation.navigate('Home')
   }
@@ -34,6 +31,10 @@ class Deck extends Component {
         <Button
           title='Add Question'
           onPress={this.addQuestion}
+        />
+        <Button
+          title='Start Quiz'
+          onPress={this.startQuiz}
         />
         <Button
           title='Delete Deck'

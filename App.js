@@ -25,7 +25,7 @@ const AppNavigator = createStackNavigator(
       screen: AddQuestion
     },
     Deck: {
-      screen: Deck
+      screen: Home
     }
   },
   {

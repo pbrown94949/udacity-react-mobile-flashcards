@@ -6,7 +6,6 @@ import { withNavigation } from 'react-navigation'
 class DeckListItem extends Component {
 
   navigate = () => {
-    console.log('here we go')
     this.props.navigation.navigate('Deck', {
       id: this.props.id,
     })
@@ -22,7 +21,6 @@ class DeckListItem extends Component {
 }
 
 function mapStateToProps({ decks }, { id }) {
-  console.log('Processing item: ', id)
   return {
     id,
     name: decks[id].name,

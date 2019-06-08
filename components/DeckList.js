@@ -4,15 +4,8 @@ import { createStore } from 'redux'
 import { Provider, connect } from 'react-redux'
 import DeckListItem from './DeckListItem'
 import { clearAll, fetchDecks } from '../utils/api'
-import { handleLoadDecks } from '../actions/decks'
-import { handleLoadQuestions } from '../actions/questions'
 
 class DeckList extends Component {
-
-  componentDidMount()  {
-    this.props.dispatch(handleLoadDecks())
-    this.props.dispatch(handleLoadQuestions())
-  }
 
   render() {
     return (
