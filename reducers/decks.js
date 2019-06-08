@@ -8,9 +8,7 @@ export default function decks(state = {}, action) {
         [action.deck.id]: action.deck
       }
     case DELETE_DECK:
-      console.log('before: ', state)
       const { [action.id]: value, ...rest} = state
-      console.log('after: ', rest)
       return {
         ...rest,
       }

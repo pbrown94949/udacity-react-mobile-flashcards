@@ -9,6 +9,7 @@ import Deck from './components/Deck'
 import AddQuestion from './components/AddQuestion'
 import DeckListItem from './components/DeckListItem'
 import Home from './components/Home'
+import Quiz from './components/Quiz'
 import reducer from './reducers'
 import middleware from './middleware'
 import { clearAll, fetchDecks } from './utils/api'
@@ -25,7 +26,10 @@ const AppNavigator = createStackNavigator(
       screen: AddQuestion
     },
     Deck: {
-      screen: Home
+      screen: Deck
+    },
+    Quiz: {
+      screen: Quiz
     }
   },
   {

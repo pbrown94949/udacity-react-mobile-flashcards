@@ -2,10 +2,9 @@ import React, { Component } from 'react'
 import { Button, StyleSheet, Text, View } from 'react-native'
 import { connect } from 'react-redux'
 import DeckList from './DeckList'
-import { handleDeleteDecks } from '../actions/decks'
-import { handleDeleteQuestions } from '../actions/questions'
-import { handleLoadDecks } from '../actions/decks'
-import { handleLoadQuestions } from '../actions/questions'
+import { handleDeleteDecks, handleLoadDecks } from '../actions/decks'
+import { handleDeleteQuestions, handleLoadQuestions } from '../actions/questions'
+import { handleLoadDummyData } from '../actions/dummydata'
 
 class Home extends Component {
 
@@ -15,7 +14,7 @@ class Home extends Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <DeckList />
         <Button
           title='Add Deck'
@@ -25,10 +24,23 @@ class Home extends Component {
           title='Delete Everything'
           onPress={this.props.deleteEverything}
         />
+        <Button
+          title='Load Test Data'
+          onPress={this.props.loadTestData}
+        />
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    justifyContent: 'space-between',
+    alignItems: 'stretch',
+  },
+})
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -39,7 +51,10 @@ function mapDispatchToProps(dispatch) {
     loadEverything: () => {
       dispatch(handleLoadDecks())
       dispatch(handleLoadQuestions())
-    }
+    },
+    loadTestData: () => {
+      dispatch(handleLoadDummyData())
+    },
   }
 }
 

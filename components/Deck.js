@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Button, StyleSheet, Text, View } from 'react-native'
 import { connect } from 'react-redux'
 import { handleDeleteDeck } from '../actions/decks'
+import { countQuestionsInDeck } from '../utils/misc.js'
 
 class Deck extends Component {
 
@@ -12,7 +13,9 @@ class Deck extends Component {
   }
 
   startQuiz = () => {
-    console.log('Start quiz')
+    this.props.navigation.navigate('Quiz', {
+      deckId: this.props.id,
+    })
   }
 
   deleteDeck = () => {
@@ -47,13 +50,10 @@ class Deck extends Component {
 
 function mapStateToProps({ decks, questions }, { navigation }) {
   const id = navigation.getParam('id', '')
-  const questionCount = Object.values(questions)
-    .filter((question) => question.deckId === id)
-    .length
   return {
       id,
       name: decks[id] ? decks[id].name : '',
-      questionCount,
+      questionCount: countQuestionsInDeck(id, questions)
   }
 }
 

@@ -1,4 +1,4 @@
-import { fetchDecks, removeDeck, removeDecks, saveNewDeck } from '../utils/api'
+import { fetchDecks, generateUID, removeDeck, removeDecks, saveNewDeck } from '../utils/api'
 
 export const ADD_DECK = 'ADD_DECK'
 export const DELETE_DECK = 'DELETE_DECK'
