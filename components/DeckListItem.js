@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { connect } from 'react-redux'
+import { StyleSheet, TouchableOpacity } from 'react-native'
 import { withNavigation } from 'react-navigation'
-import { countQuestionsInDeck } from '../utils/misc.js'
+import DeckDescription from './DeckDescription'
 
 class DeckListItem extends Component {
 
@@ -14,25 +13,20 @@ class DeckListItem extends Component {
   }
 
   render() {
-    const { deckSize, name } = this.props
     return (
-      <TouchableOpacity onPress={this.goToDeck}>
-        <Text style={{fontSize: 24}}>{name}</Text>
-        <Text>Questions: {deckSize}</Text>
+      <TouchableOpacity style={styles.container} onPress={this.goToDeck}>
+        <DeckDescription id={this.props.id} />
       </TouchableOpacity>
     )
   }
 }
 
-function mapStateToProps({ decks, questions }, { id }) {
-  const deckSize = Object.values(questions)
-    .filter((question) => question.deckId === id)
-    .length
-  return {
-    id,
-    name: decks[id].name,
-    deckSize,
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: '#d6d7da',
   }
-}
+})
 
-export default withNavigation(connect(mapStateToProps)(DeckListItem))
+export default withNavigation(DeckListItem)

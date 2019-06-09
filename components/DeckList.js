@@ -7,7 +7,7 @@ class DeckList extends Component {
 
   render() {
     return (
-      <View style={styles.zed}>
+      <View style={styles.container}>
         {this.props.decks.map((id) => (
           <DeckListItem key={id} id={id} />
         ))}
@@ -17,17 +17,22 @@ class DeckList extends Component {
 }
 
 function mapStateToProps({ decks }) {
+  const sortedIds = Object.values(decks)
+            .sort((a,b) => {
+              const nameCompare = a.name.localeCompare(b.name)
+              return nameCompare !== 0
+                ? nameCompare
+                : a.id.localeCompare(b.id)
+            })
+            .map((deck) => deck.id)
   return {
-    decks: Object.keys(decks),
+    decks: sortedIds
   }
 }
 
 const styles = StyleSheet.create({
-  zed: {
+  container: {
     flex: 1,
-    justifyContent: 'flex-start',
-    backgroundColor: '#fff',
-    alignItems: 'stretch',
   },
 })
 

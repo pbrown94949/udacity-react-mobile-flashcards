@@ -3,6 +3,7 @@ import { Button, StyleSheet, Text, View } from 'react-native'
 import { connect } from 'react-redux'
 import { handleDeleteDeck } from '../actions/decks'
 import { countQuestionsInDeck } from '../utils/misc.js'
+import DeckDescription from './DeckDescription'
 
 class Deck extends Component {
 
@@ -29,25 +30,44 @@ class Deck extends Component {
   render() {
     const { deckSize, id, name } = this.props
     return (
-      <View>
-        <Text>{name}</Text>
-        <Text>Questions: {deckSize}</Text>
-        <Button
-          title='Add Question'
-          onPress={this.addQuestion}
-        />
-        <Button
-          title='Start Quiz'
-          onPress={this.startQuiz}
-        />
-        <Button
-          title='Delete Deck'
-          onPress={this.deleteDeck}
-        />
+      <View style={styles.container}>
+        <DeckDescription id={id} />
+        <View style={styles.buttons}>
+          <Button
+            title='Add Question'
+            onPress={this.addQuestion}
+          />
+          <Button
+            title='Start Quiz'
+            onPress={this.startQuiz}
+          />
+          <Button
+            title='Delete Deck'
+            onPress={this.deleteDeck}
+          />
+          </View>
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: '#d6d7da',
+  },
+  buttons: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+  deckTitle: {
+    fontSize: 24,
+  },
+  deckDetails: {
+    fontSize: 14,
+  }
+})
 
 function mapStateToProps({ decks, questions }, { navigation }) {
   const id = navigation.getParam('id', '')
