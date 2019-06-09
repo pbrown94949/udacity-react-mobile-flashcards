@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Button, Text, TextInput, View } from 'react-native'
 import { connect } from 'react-redux'
 import { handleAddDeck } from '../actions/decks'
-import { generateUID } from '../utils/api.js'
+import { generateUID } from '../utils/misc'
 
 class AddDeck extends Component {
 

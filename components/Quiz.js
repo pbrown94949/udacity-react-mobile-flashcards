@@ -25,7 +25,7 @@ class Quiz extends Component {
     if (deckSize < 1) {
       return (
         <View>
-          <Text>No questions available</Text>
+          <Text>No questions available.</Text>
         </View>
       )
     }

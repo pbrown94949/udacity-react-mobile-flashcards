@@ -2,6 +2,7 @@ import { AsyncStorage } from 'react-native'
 
 const DECK_STORAGE_KEY = 'mobile-flashcards:decks'
 const QUESTION_STORAGE_KEY = 'mobile-flashcards:questions'
+const NOTIFICATION_STORAGE_KEY = 'mobile-flashcards:notifications'
 
 export function fetchDecks() {
   return AsyncStorage.getItem(DECK_STORAGE_KEY)
@@ -28,11 +29,6 @@ export function removeDecks() {
   return AsyncStorage.removeItem(DECK_STORAGE_KEY)
 }
 
-export function logDecks() {
-  return AsyncStorage.getItem(DECK_STORAGE_KEY)
-    .then((item) => console.log(JSON.parse(item)))
-}
-
 export function fetchQuestions() {
   return AsyncStorage.getItem(QUESTION_STORAGE_KEY)
     .then((item) => JSON.parse(item))
@@ -48,11 +44,24 @@ export function removeQuestions() {
   return AsyncStorage.removeItem(QUESTION_STORAGE_KEY)
 }
 
-export function logQuestions() {
-  return AsyncStorage.getItem(QUESTION_STORAGE_KEY)
-    .then((item) => console.log(JSON.parse(item)))
+export function setNotificationFlag() {
+   return AsyncStorage.setItem(NOTIFICATION_STORAGE_KEY, JSON.stringify(true))
 }
 
-export function generateUID () {
-  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+export function fetchNotificationFlag() {
+  return AsyncStorage.getItem(NOTIFICATION_STORAGE_KEY)
+    .then((item) => JSON.parse(item))
+}
+
+export function removeNotificationFlag() {
+  return AsyncStorage.removeItem(NOTIFICATION_STORAGE_KEY)
+}
+
+export function logAsyncStorage() {
+  AsyncStorage.getItem(DECK_STORAGE_KEY)
+    .then((item) => console.log(JSON.parse(item)))
+  AsyncStorage.getItem(QUESTION_STORAGE_KEY)
+    .then((item) => console.log(JSON.parse(item)))
+  AsyncStorage.getItem(NOTIFICATION_STORAGE_KEY)
+    .then((item) => console.log(JSON.parse(item)))
 }

@@ -4,6 +4,7 @@ import { createStore } from 'redux'
 import { Provider, connect } from 'react-redux'
 import { createStackNavigator, createAppContainer } from 'react-navigation'
 import AddDeck from './components/AddDeck'
+import Debug from './components/Debug'
 import DeckList from './components/DeckList'
 import Deck from './components/Deck'
 import AddQuestion from './components/AddQuestion'
@@ -13,6 +14,7 @@ import Quiz from './components/Quiz'
 import reducer from './reducers'
 import middleware from './middleware'
 import { clearAll, fetchDecks } from './utils/api'
+import { initializeNotification } from './utils/notifications'
 
 const AppNavigator = createStackNavigator(
   {
@@ -24,6 +26,9 @@ const AppNavigator = createStackNavigator(
     },
     AddQuestion: {
       screen: AddQuestion
+    },
+    Debug: {
+      screen: Debug
     },
     Deck: {
       screen: Deck
@@ -40,6 +45,10 @@ const AppNavigator = createStackNavigator(
 const AppContainer = createAppContainer(AppNavigator)
 
 class App extends Component {
+
+  componentDidMount() {
+    initializeNotification()
+  }
 
   render() {
     return (

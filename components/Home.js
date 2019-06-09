@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { Button, StyleSheet, Text, View } from 'react-native'
 import { connect } from 'react-redux'
 import DeckList from './DeckList'
-import { handleDeleteDecks, handleLoadDecks } from '../actions/decks'
-import { handleDeleteQuestions, handleLoadQuestions } from '../actions/questions'
-import { handleLoadDummyData } from '../actions/dummydata'
-import { logDecks, logQuestions } from '../utils/api'
+import { handleLoadDecks } from '../actions/decks'
+import { handleLoadQuestions } from '../actions/questions'
+
+const ENABLE_DEBUG = true
 
 class Home extends Component {
 
@@ -14,7 +14,7 @@ class Home extends Component {
   }
 
   render() {
-    const { deleteEverything, loadTestData, navigation } = this.props
+    const { navigation } = this.props
     return (
       <View style={styles.container}>
         <DeckList />
@@ -22,22 +22,12 @@ class Home extends Component {
           title='Add Deck'
           onPress={() => navigation.navigate('AddDeck')}
         />
-        <Button
-          title='Delete Everything'
-          onPress={deleteEverything}
-        />
-        <Button
-          title='Load Test Data'
-          onPress={loadTestData}
-        />
-        <Button
-          title='Log Decks'
-          onPress={logDecks}
-        />
-        <Button
-          title='Log Questions'
-          onPress={logQuestions}
-        />
+        {ENABLE_DEBUG &&
+          <Button
+            title='Go to Debug'
+            onPress={() => navigation.navigate('Debug')}
+          />
+        }
       </View>
     )
   }
@@ -54,16 +44,9 @@ const styles = StyleSheet.create({
 
 function mapDispatchToProps(dispatch) {
   return {
-    deleteEverything: () => {
-      dispatch(handleDeleteDecks())
-      dispatch(handleDeleteQuestions())
-    },
     loadEverything: () => {
       dispatch(handleLoadDecks())
       dispatch(handleLoadQuestions())
-    },
-    loadTestData: () => {
-      dispatch(handleLoadDummyData())
     },
   }
 }

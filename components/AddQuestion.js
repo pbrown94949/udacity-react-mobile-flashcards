@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
 import { connect } from 'react-redux'
 import { handleAddQuestion } from '../actions/questions'
-import { generateUID } from '../utils/api.js'
+import { generateUID } from '../utils/misc'
 
 class AddQuestion extends Component {
 

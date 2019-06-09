@@ -1,4 +1,5 @@
-import { fetchDecks, generateUID } from '../utils/api'
+import { fetchDecks } from '../utils/api'
+import { generateUID } from '../utils/misc'
 import { handleAddDeck } from './decks.js'
 import { handleAddQuestion } from './questions.js'
 
